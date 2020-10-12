@@ -1,0 +1,45 @@
+{% extends 'base2(back).html.twig' %}
+
+{% block body %}
+<div class="breadcrumbs">
+<div class="breadcrumbs-inner">
+<div class="row m-0">
+<div class="col-sm-4">
+<div class="page-header float-left">
+<div class="page-title">
+<h1>Dashboard</h1>
+</div>
+</div>
+</div>
+<div class="col-sm-8">
+<div class="page-header float-right">
+<div class="page-title">
+<ol class="breadcrumb text-right">
+<li><a href="#">Dashboard</a></li>
+<li><a href="#">UI Elements</a></li>
+<li class="active">Cards</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="content">
+{% for commentaire in commentaires %}
+<div class="col-md-8">
+<div class="card border border-primary">
+<div class="card-header">
+<strong class="card-title">{{ commentaire.getUtilisateur.username }}</strong>
+<a href="{{ path('back_article_delete_comment',{'id':commentaire.id}) }}" class="btn btn-danger pull-right"><i class="fa fa-trash"></i></a>
+<br>
+<small>{{ commentaire.getUtilisateur.email }}</small>
+</div>
+<div class="card-body">
+<p class="card-text">{{ commentaire.commentaire }}</p>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,699 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+		<style>
+
+		.headline-card {
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    background: #fff;
+    float: left;
+    margin: 0 0px 20px;
+    border-radius: 0px;
+    border: 0px;
+}
+
+.headline-card .image-wrap {
+    background: -webkit-linear-gradient(bottom,rgba(0,0,0,.7),rgba(0,0,0,0) 100%);
+    background: -moz-linear-gradient(bottom,rgba(0,0,0,.7),rgba(0,0,0,0) 100%);
+    background: -ms-linear-gradient(bottom,rgba(0,0,0,.7),rgba(0,0,0,0) 100%);
+    background: linear-gradient(bottom,rgba(0,0,0,.7),rgba(0,0,0,0) 100%);
+    text-decoration: none;
+    display: block;
+}
+
+.headline-card .image-small {
+    width: 358px;
+    height: 249px;
+    transition-property: -webkit-transform, opacity;
+    transition-duration: 0.6s, 0.3s;
+}
+
+.headline-card .gradient {
+    background: -webkit-linear-gradient(bottom,rgba(0,0,0,.7),rgba(0,0,0,0) 100%);
+    background: -moz-linear-gradient(bottom,rgba(0,0,0,.7),rgba(0,0,0,0) 100%);
+    background: -ms-linear-gradient(bottom,rgba(0,0,0,.7),rgba(0,0,0,0) 100%);
+    background: linear-gradient(bottom,rgba(0,0,0,.7),rgba(0,0,0,0) 100%);
+    text-decoration: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+.headline-card .gradient.gradient-small {
+    height: 249px;
+}
+
+.headline-card.loaded .gradient {
+    display: block;
+}
+
+.headline-card .body {
+    position: absolute;
+    bottom: 190px;
+    left: 15px;
+    right: 15px;
+}
+
+.headline-card .body h3 {
+    line-height: 1.4;
+    clear: both;
+    font-size: 20px;
+    font-family: opensans-bold,sans-serif;
+    margin-bottom: 7px;
+    /* text-shadow: 0 2px 10px rgba(0,0,0,.4); */
+    font-weight: bold;
+}
+
+.headline-card .body h3 a {
+    text-decoration: none;
+    color: #333;
+}
+
+.headline-card .news-info {
+    font-size: 12px;
+    color: #333;
+    font-family: opensans-light,sans-serif;
+    margin-bottom: 8px;
+    height: 15px;
+}
+
+.headline-card .news-info span {
+    display: inline-block;
+    overflow: hidden;
+    height: 15px;
+    border: 0px;
+    border-right: 1px solid #333;
+    padding-right: 8px;
+    padding-left: 5px;
+}
+
+.headline-card .news-info span:last-child {
+    border-right: 0px !important;
+}
+
+.headline-card .news-info a {
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #167ac6;
+    max-width: 150px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+.headline-card .news-info a:hover, 
+.headline-card .news-info a:focus, 
+.headline-card .news-info a.focus, 
+.headline-card .news-info a:active, 
+.headline-card .news-info a.active {
+    text-decoration: underline;
+}
+
+.headline-card .not-interested {
+    top: 5px;
+    right: 8px;
+    position: absolute;
+}
+
+.headline-card .not-interested a {
+    height: 24px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: opensans,sans-serif;
+    display: block;
+    opacity: 1 !important;
+    color: #fff !important;
+    font-weight: normal !important;
+    padding: 5px !important;
+    border: 1px solid rgba(255, 255, 255, 0) !important;
+    text-shadow: none !important;
+    background-color: transparent;
+}
+
+.headline-card .not-interested a:hover, 
+.headline-card .not-interested a:active, 
+.headline-card .not-interested a:focus, 
+.headline-card .not-interested a.active, 
+.headline-card .not-interested a.focus {
+    border: 1px solid #fff !important;
+    border-radius: 0 !important;
+}
+
+.news-source {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 290px;
+    height: 50px;
+}
+
+.news-source div.source-section {
+    position: absolute;
+    float: left;
+}
+
+.news-source div.source-section a {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.news-source div.first-section {
+    height: 26px;
+}
+
+.news-source div.first-lower-section {
+    margin-top: 26px;
+    height: 22px !important;
+}
+
+.news-source div.news-tags-reveal {
+    float: right;
+    margin-top: 26px;
+    border-bottom: 1px #777 solid;
+}
+
+.news-source div.news-tags-reveal span {
+    color: #777;
+    font-size: 13px;
+}
+
+.subscribe span {
+    border: 1px solid #ccc;
+    border-left: none !important;
+    padding: 3px 5px;
+    font-size: 12px;
+    margin-left: -5px;
+}
+
+.btn-subscribe{
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.headline-card .text-preview {
+    font-size: 15px;
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 100px;
+    line-height: 1.4;
+    overflow: hidden;
+    max-height: 90px;
+}
+
+.headline-card .text-preview a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
+
+.headline-card .text-preview * {
+    font-size: 14px;
+    font-style: normal;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.headline-card .news-tags {
+    overflow-y: hidden;
+    position: absolute;
+    left: 11px;
+    right: 11px;
+    bottom: 50px;
+}
+
+.news-tag {
+    font-family: opensans,sans-serif;
+    padding: 0px !important;
+    margin: 2px 4px !important;
+    font-size: 13px;
+}
+
+.headline-card .news-actions {
+    border-top: 1px solid #ccc;
+    position: absolute;
+    bottom: 0px;
+    left: 8px;
+    right: 8px;
+    padding: 4px 10px;
+}
+
+.news-action {
+    margin-top: 4px;
+    margin-bottom: 7px;
+    color: #777;
+    font-size: 13px;
+    text-decoration: none;
+    width: 73px;
+    text-align: start;
+    padding: 1px 0px;
+    line-height: 1.5;
+    border-radius: 3px;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+.news-action:hover, 
+.news-action:focus, 
+.news-action.focus, 
+.news-action:active, 
+.news-action.active {
+    color: #000;
+    text-decoration: none;
+}
+
+.headline-card .news-actions .btn-action:last-child {
+    border-right: 1px solid rgba(255, 255, 255, 0) !important;
+    width: 16px !important;
+}
+
+a {
+    color: #3366cc;
+    text-decoration: none;
+}
+
+a#visited {
+    color: #427fed;
+    text-decoration: none;
+}
+
+/*------------------dont copy these lines----------------------*/
+body {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", 
+    "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    background-color: #f3f3f3;
+}
+
+.row {
+    margin: 30px 0;
+}
+
+.container {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
+#quicknav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+#quicknav ul li { 
+    display: inline; 
+}
+
+#quicknav ul li a {
+    text-decoration: none;
+    padding: .2em 1em;
+}
+
+.btn-default {
+    margin-bottom: 40px;
+}
+/*-------------------------------------------------------------*/
+
+
+		.tile{
+	width: 100%;
+	background:#fff;
+	border-radius:5px;
+	box-shadow:0px 2px 3px -1px rgba(151, 171, 187, 0.7);
+	float:left;
+  	transform-style: preserve-3d;
+  	margin: 10px 5px;
+
+}
+
+.header{
+	border-bottom:1px solid #ebeff2;
+	padding:19px 0;
+	text-align:center;
+	color:#59687f;
+	font-size:600;
+	font-size:19px;	
+	position:relative;
+}
+
+.banner-img {
+	padding: 5px 5px 0;
+}
+
+.banner-img img {
+	width: 100%;
+	border-radius: 5px;
+}
+
+.dates{
+	border:1px solid #ebeff2;
+	border-radius:5px;
+	padding:20px 0px;
+	margin:10px 20px;
+	font-size:16px;
+	color:#5aadef;
+	font-weight:600;	
+	overflow:auto;
+}
+.dates div{
+	float:left;
+	width:50%;
+	text-align:center;
+	position:relative;
+}
+.dates strong,
+.stats strong{
+	display:block;
+	color:#adb8c2;
+	font-size:11px;
+	font-weight:700;
+}
+.dates span{
+	width:1px;
+	height:40px;
+	position:absolute;
+	right:0;
+	top:0;	
+	background:#ebeff2;
+}
+.stats{
+	border-top:1px solid #ebeff2;
+	background:#f7f8fa;
+	overflow:auto;
+	padding:15px 0;
+	font-size:16px;
+	color:#59687f;
+	font-weight:600;
+	border-radius: 0 0 5px 5px;
+}
+.stats div{
+	border-right:1px solid #ebeff2;
+	width: 33.33333%;
+	float:left;
+	text-align:center
+}
+
+.stats div:nth-of-type(3){border:none;}
+
+div.footer {
+	text-align: right;
+	position: relative;
+	margin: 20px 5px;
+}
+
+div.footer a.Cbtn{
+	padding: 10px 25px;
+	background-color: #DADADA;
+	color: #666;
+	margin: 10px 2px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: none;
+	border-radius: 3px;
+}
+
+div.footer a.Cbtn-primary{
+	background-color: #5AADF2;
+	color: #FFF;
+}
+
+div.footer a.Cbtn-primary:hover{
+	background-color: #7dbef5;
+}
+
+div.footer a.Cbtn-danger{
+	background-color: #fc5a5a;
+	color: #FFF;
+}
+
+div.footer a.Cbtn-danger:hover{
+	background-color: #fd7676;
+}
+
+.social-buttons {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+.social-buttons li {
+  display: inline-block;
+}
+		</style>
+
+        <script type="text/javascript" src="{{ asset('bundles/acmedemo/js/tmort-Socialite-6d9da1d/socialite.js') }}"></script>
+
+		
+			<div class="hero hero-slider">
+				<ul class="slides">
+					<li data-bg-image="{{ asset('Assets/dummy/slide-1.jpg') }}">
+						<div class="container">
+							<div class="slide-content">
+								<h2 class="slide-title">Get your <strong>Life Insurance</strong></h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus quos cumque odio soluta harum error sequi laudantium, est nam perspiciatis eveniet maxime, esse possimus architecto sunt natus reprehenderit debitis fugit.</p>
+								<a href="#" class="button">Get a quote</a>
+							</div>
+						</div>
+					</li>
+					<li data-bg-image="{{ asset('Assets/dummy/slide-2.jpg') }}">
+						<div class="container">
+							<div class="slide-content">
+								<h2 class="slide-title">Get your <strong>Life Insurance</strong></h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus quos cumque odio soluta harum error sequi laudantium, est nam perspiciatis eveniet maxime, esse possimus architecto sunt natus reprehenderit debitis fugit.</p>
+								<a href="#" class="button">Get a quote</a>
+							</div>
+						</div>
+					</li>
+					<li data-bg-image="{{ asset('Assets/dummy/slide-3.jpg') }}">
+						<div class="container">
+							<div class="slide-content">
+								<h2 class="slide-title">Get your <strong>Life Insurance</strong></h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus quos cumque odio soluta harum error sequi laudantium, est nam perspiciatis eveniet maxime, esse possimus architecto sunt natus reprehenderit debitis fugit.</p>
+								<a href="#" class="button">Get a quote</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div> <!-- .hero-slider -->
+
+			<main class="main-content">
+				<div class="fullwidth-block greet-section">
+					<div class="container">
+						<h2 class="section-title">Welcome to our website</h2>
+						<small class="section-subtitle">Etiam suscipit leo tincidunt risus dignissim quisque semper mollis</small>
+
+						<div class="row">
+							<div class="col-md-3">
+								<div class="feature">
+									<i class="icon-phone-24"></i>
+									<h3 class="feature-title">24 hours Service</h3>
+									<p>Lorem ipsum dolor amet consectetur adipiscing elit do eiusmod tempor incididunt labore dolore magna aliqua.</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="feature">
+									<i class="icon-hotel"></i>
+									<h3 class="feature-title">Hospitality</h3>
+									<p>Lorem ipsum dolor amet consectetur adipiscing elit do eiusmod tempor incididunt labore dolore magna aliqua.</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="feature">
+									<i class="icon-luggage"></i>
+									<h3 class="feature-title">Praesent pellentesque </h3>
+									<p>Lorem ipsum dolor amet consectetur adipiscing elit do eiusmod tempor incididunt labore dolore magna aliqua.</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="feature">
+									<i class="icon-credit-card-hand"></i>
+									<h3 class="feature-title">Consectetur interdum</h3>
+									<p>Lorem ipsum dolor amet consectetur adipiscing elit do eiusmod tempor incididunt labore dolore magna aliqua.</p>
+								</div>
+							</div>
+						</div> <!-- .row -->
+
+						<div class="text-center">
+							<p>Sollicitudin sit tortor pellentesque. <a href="#">Read more</a></p>
+						</div>
+					</div> <!-- .container -->
+				</div> <!-- .fullwidth-block -->
+
+				<div class="fullwidth-block" data-bg-color="#f1f1f1">
+					<div class="container">
+						<h2 class="section-title">Our insurance offer</h2>
+						<small class="section-subtitle">Phasellus vel felis in nulla mollis posuere eget rutrum eros</small>
+
+						<div class="container-fluid">
+        <div class="row">
+		{% for evennement in evennements %}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="tile">
+                    <div class="wrapper">
+                        <div class="header">{{ evennement.titre }}</div>
+
+                        <div class="banner-img">
+                            <img src="{{ evennement.image }}" alt="Image 1">
+                        </div>
+
+                        <div class="dates">
+                            <div class="start">
+                                <strong>Début</strong> {{ evennement.StartDate|date('d-m-y') }}<br>{{ evennement.StartDate|date('h:i') }}
+                                <span></span>
+                            </div>
+                            <div class="ends">
+                                <strong>Fin</strong> {{ evennement.DueDate|date('d-m-y') }}<br>{{ evennement.DueDate|date('h:i') }}
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="footer">
+                            <a href="{{ path('back_event_add_partcipant',{'id':evennement.id}) }}" id="participation" class="btn btn-primary">Je participe</a>
+                                {{ evennement.participants }}<br><strong>participants</strong>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+            {% endfor %}
+
+					</div>
+						</div> <!-- .row -->
+
+					</div> <!-- .container -->
+				</div> <!-- .offer-section -->
+
+				<div class="fullwidth-block">
+					<div class="container">
+						<h2 class="section-title">Latest news</h2>
+						<div class="container" style="background-color: #f3f3f3;">
+  <div class="row">
+{% for article in articles %}
+    <div class="col-lg-4 col-md-6 col-xs-12">
+      <div class="headline-card tracked loaded" style="height: 600px;">
+        <a class="image-wrap" href="#">
+            <img class="image image-small" src="{{ article.image }}" />
+        </a>
+        <div class="news-source">
+
+          <div class="source-section first-section first-lower-section subscribe">
+            <a href="{{ path('front_article',{'id':article.id}) }}" class="btn btn-success btn-xs btn-subscribe"><i class="fa fa-newspaper-o fa-lg"></i>Consulter l'article</a>
+          </div>
+          <div class="news-tags-reveal">
+            <span>254 views</span>
+          </div>
+        </div>
+
+        <div class="body">
+          <h3>
+            <a href="">{{ article.titre }}</a>
+          </h3>
+        </div>
+
+        <div class="text-preview">
+          <p>
+            <a href="#">{{ article.text }}</a>
+          </p>
+        </div>
+
+        <div class="news-actions" role="group" aria-label="">
+          <!--<a class="news-action" href="#">--><i class="fa fa-share fa-lg" style="padding:0 20px"></i>
+          <i class="fa fa-heart-o fa-lg" style="padding:0 20px" id="Like{{ article.id }}" onclick="myFunction({{ article.id }})"></i><span id="articleIdLikes{{ article.id }}">{{ article.getCommentaires().count() }}</span>
+          <i class="fa fa-comments fa-lg" style="padding:0 20px"></i>{{ article.getLikes() }}
+        <ul class="social-buttons cf">
+  
+    <li>
+        <a href="http://www.facebook.com/sharer.php?u={{ app.request.getUri }}" class="socialite facebook-like" data-href="{{ app.request.getUri }}" data-send="false" data-layout="box_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">Partager sur Facebook</span></a>
+    </li>
+</ul>
+        </div>
+
+      </div>
+    </div>
+{% endfor %}
+   
+</div>
+
+					</div> <!-- .container -->
+				</div> <!-- .latest-news-section -->
+
+				<div class="fullwidth-block" data-bg-color="#0f75bd">
+					<div class="container">
+						<div class="testimonial-slider">
+							<ul class="slides">
+								<li>
+									<blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam quod explicabo optio quia ex odit, sequi harum voluptatibus autem. Nam autem corporis deleniti fugiat omnis itaque, quis laudantium dolor facere.<cite>John Smith</cite></blockquote>
+								</li>
+								<li>
+									<blockquote>At doloremque, itaque molestias neque nesciunt placeat aspernatur veniam fugit enim, dolor, repudiandae a. Laborum optio dolorum qui maxime doloribus eligendi in enim minima quo? Quis tenetur eos, libero exercitationem.<cite>John Smith</cite></blockquote>
+								</li>
+								<li>
+									<blockquote>Ipsam nesciunt velit voluptatem? Voluptas amet, porro eaque asperiores magni rerum vitae nulla inventore, numquam facilis doloribus placeat iure suscipit adipisci dolores modi saepe deserunt nisi. Nam, illum aperiam velit.<cite>John Smith</cite></blockquote>
+								</li>
+							</ul>
+						</div>
+					</div> <!-- .container -->
+				</div> <!-- .fullwidth-block -->
+
+				<div class="fullwidth-block">
+					<div class="container">
+						<h2 class="section-title">Our partners</h2>
+
+						<div class="partners">
+							<a href="#"><img src="{{ asset('Assets/dummy/money-logo.png') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('Assets/dummy/nyt-logo.png') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('Assets/dummy/forbes-logo.png') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('Assets/dummy/wsj-logo.png') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('Assets/dummy/bbs-logo.png') }}" alt=""></a>
+						</div> <!-- .partners -->
+					</div> <!-- .container -->
+				</div> <!-- .fullwidth-block -->
+
+				<div class="fullwidth-block">
+					<div class="map"></div>
+				</div>
+			</main>
+
+			<script>
+            $(document).ready(function() {
+             Socialite.load();
+            });
+                function myFunction(id){
+                    if(document.getElementById('Like'+id).style.color == 'red'){
+                    document.getElementById('Like'+id).style.color = '';
+                    x = parseInt(document.getElementById('articleIdLikes'+id).innerHTML);
+                    x = x - 1;
+                    document.getElementById('articleIdLikes'+id).innerHTML = x.toString();
+                    }else{
+                    document.getElementById('Like'+id).style.color = 'red';
+                    x = parseInt(document.getElementById('articleIdLikes'+id).innerHTML);
+                    x = x + 1;
+                    document.getElementById('articleIdLikes'+id).innerHTML = x.toString();
+                    }
+                }
+            </script>
+
+		
+{% endblock %}

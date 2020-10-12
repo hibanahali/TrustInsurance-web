@@ -1,0 +1,51 @@
+back_homepage:
+    path:     /admin
+    defaults: { _controller: BackBundle:Back:index }
+
+back_articles:
+    path:     /admin/articles
+    defaults: { _controller: BackBundle:Article:articles }
+
+back_articles_add:
+    path:     /admin/add_article
+    defaults: { _controller: BackBundle:Article:Addarticle }
+
+back_articles_edit:
+    path:     /admin/edit_article{id}
+    defaults: { _controller: BackBundle:Article:Editarticle }
+
+back_articles_delete:
+    path:     /admin/delete_article{id}
+    defaults: { _controller: BackBundle:Article:Deletearticle }
+
+back_events:
+    path:     /admin/events
+    defaults: { _controller: BackBundle:Event:events }
+
+back_events_add:
+    path:     /admin/add_event
+    defaults: { _controller: BackBundle:Event:Addevent }
+
+back_events_edit:
+    path:     /admin/edit_event{id}
+    defaults: { _controller: BackBundle:Event:Editevent }
+
+back_events_delete:
+    path:     /admin/delete_event{id}
+    defaults: { _controller: BackBundle:Event:Deletevent }
+
+
+back_event_add_partcipant:
+    path:     /admin/event{id}/add_participant
+    defaults: { _controller: BackBundle:Event:AddParticipant }
+
+back_articles_comments:
+    path:     /admin/articles{id}/comments
+    defaults: { _controller: BackBundle:Article:articleComments }
+
+back_article_delete_comment:
+    path:     /article{id}/deleteComment
+    defaults: { _controller: BackBundle:Article:articleDeleteComment }
+recherche:
+    path:     /admin/rechercheArticle
+    defaults: { _controller: BackBundle:Article:RechercheArticle }

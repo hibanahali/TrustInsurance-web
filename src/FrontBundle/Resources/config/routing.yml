@@ -1,0 +1,30 @@
+front_homepage:
+    path:     /
+    defaults: { _controller: FrontBundle:Front:index }
+
+front_article:
+    path:     /article{id}
+    defaults: { _controller: FrontBundle:Front:article }
+
+front_serach:
+    path:     /search
+    defaults: { _controller: FrontBundle:Front:search }
+front_article_add_like:
+    path:     /add_article_like/{id}
+    defaults: { _controller: FrontBundle:Front:articleAddLike }
+    methods: [post]
+
+
+front_article_add_comment:
+    path:     /article{id}/addComment
+    defaults: { _controller: FrontBundle:Front:articleAddComment }
+
+
+front_articles_list:
+    path:     /searchArticles
+    defaults: { _controller: FrontBundle:Front:searchArticles }
+
+front_article_delete_comment:
+    path:     /delete_comment{id}
+    defaults: { _controller: FrontBundle:Front:deleteComment }
+

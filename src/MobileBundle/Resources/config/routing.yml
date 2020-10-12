@@ -1,0 +1,51 @@
+mobile_login:
+    path:     /mobile/loginM
+    defaults: { _controller: MobileBundle:Default:login }
+mobile_getAllEvents:
+    path: /mobile/getAllEvents
+    defaults: { _controller: MobileBundle:Default:getAllEvents }
+mobile_getAllEventsByName:
+    path: /mobile/getAllEventsByName
+    defaults: { _controller: MobileBundle:Default:getAllEventByname }
+mobile_addEvent:
+    path: /mobile/addEvent
+    defaults: { _controller: MobileBundle:Default:AddEvent }
+mobile_EditEvent:
+    path: /mobile/editEvent/{id}
+    defaults: { _controller: MobileBundle:Default:EditEvent }
+mobile_DeleteEvent:
+    path: /mobile/deleteEvent/{id}
+    defaults: { _controller: MobileBundle:Default:DeleteEvent }
+mobile_ParticipeEvent:
+    path: /mobile/ParticipeEvent/{id}
+    defaults: { _controller: MobileBundle:Default:ParticipeEvent }
+mobile_getAllArticles:
+    path: /mobile/getAllArticles
+    defaults: { _controller: MobileBundle:Default:getAllArticles }
+mobile_getAllArticlesByName:
+    path: /mobile/getAllArticlesByName
+    defaults: { _controller: MobileBundle:Default:getAllArticleByName }
+mobile_addArticle:
+    path: /mobile/addArticle
+    defaults: { _controller: MobileBundle:Default:AddArticle }
+mobile_EditArticle:
+    path: /mobile/editArticle/{id}
+    defaults: { _controller: MobileBundle:Default:EditArticle }
+mobile_DeleteArticle:
+    path: /mobile/deleteArticle/{id}
+    defaults: { _controller: MobileBundle:Default:DeleteArticle }
+mobile_AddComment:
+    path: /mobile/addcomment
+    defaults: { _controller: MobileBundle:Default:addComment }
+mobile_editComment:
+    path: /mobile/editComment/{id}
+    defaults: { _controller: MobileBundle:Default:editComment }
+mobile_DeleteComment:
+    path: /mobile/deleteComment/{id}
+    defaults: { _controller: MobileBundle:Default:deleteComment }
+mobile_getAllCommentsByArticle:
+    path: /mobile/getCommentsByArticle/{id}
+    defaults: { _controller: MobileBundle:Default:getCommentsByArticle }
+mobile_LikeArticle:
+    path: /mobile/LikeArticle/{id}
+    defaults: { _controller: MobileBundle:Default:LikeArticle }

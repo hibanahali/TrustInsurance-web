@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="site-content">
+	
+
+			<main class="main-content">
+				<div class="breadcrumbs">
+					<div class="container">
+						<a href="index.html">Home</a>
+						<span>Insurance</span>
+					</div>
+				</div>
+
+				<div class="page">
+					<div class="container">
+						
+					<h3 class="entry-title">List des articles</h3>
+						<div class="filter-links filterable-nav">
+							<select class="mobile-filter">
+								<option value="*">Show all</option>
+								<option value=".skyscraper">skyscraper</option>
+								<option value=".shopping-center">shopping-center</option>
+								<option value=".apartment">apartment</option>
+							</select>
+							<strong>Choisir une categorie: </strong>
+							<a href="#" class="current wow fadeInRight" data-filter="*">Show all</a>
+							{% for article in articles %}
+							<a href="#" class="wow fadeInRight" data-wow-delay=".2s" data-filter=".{{ article.categorie }}">{{ article.categorie }}</a>
+							{% endfor %}
+						</div>
+						<div class="filterable-items">
+							{% for article in articles %}
+								<div class="insurance-content">
+									<h3 class="insurance-title">{{ article.titre }}</h3>
+									<p>{{ article.text }}</p>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div> <!-- .page -->
+			</main>
+
+			
+				</div>
+{% endblock %}

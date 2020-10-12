@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% for article in articles %}
+ <section class="hero">
+         <div class="container">
+          <div class="row">	
+		  
+		   <div class="col-lg-6 offset-lg-3">
+			
+			<div class="cardbox shadow-lg bg-white">
+			 
+			 <div class="cardbox-heading">
+			  
+			  <div class="media m-0">
+			   
+			   <div class="media-body">
+			    <h3>{{ article.titre }}</h3>
+				<small><span><i class="icon ion-md-time"></i>{{ article.CreatedDate|date('d/m/y') }}</span></small>
+			   </div>
+			  </div><!--/ media -->
+			 </div><!--/ cardbox-heading -->
+			  
+			 <div class="cardbox-item">
+			  <!--<img class="img-fluid" src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/1.jpg" alt="Image">-->
+			  <p style="text-align:center">{{ article.text }}</p>
+			  <img class="img-fluid" src="{{ article.image }}" alt="Image">
+			 </div><!--/ cardbox-item --> 
+			 <div class="cardbox-base">
+			  <ul class="float-right">
+			   <!--<li><a><i class="fa fa-comments"></i></a></li>
+			   <li><a><em class="mr-5">12</em></a></li>
+			   <li><a><i class="fa fa-share-alt"></i></a></li>
+			   <li><a><em class="mr-3">03</em></a></li>-->
+			  </ul>
+			  <ul>
+			   
+			  </ul>	 
+			  <form id="likesForm" action="{{ path('front_article_add_like',{'id':article.id}) }}" method="post">
+			  </form>  
+			 </div><!--/ cardbox-base -->
+			 <div class="cardbox-comments">
+			  <span class="comment-avatar float-left">
+			   <a href=""><img class="rounded-circle" src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/6.jpg" alt="..."></a>                            
+			  </span>
+              <form action="{{ path('front_article_add_comment',{'id':article.id}) }}" method="post">
+			  <div class="search">
+			   <input placeholder="Ecrire un commentaire" type="text" name="commentaire">
+			  </div><!--/. Search -->
+			  </div><!--/ cardbox-like -->
+              <input type="submit" class="btn btn-success btn-xs pull-right" value="Soummetre" style="position:relative;top:70px;right:85px">
+              </form>
+              <br><br>
+			  
+			
+			 <div class="row bootstrap snippets">
+    <div class="col-md-6 col-md-offset-2 col-sm-12">
+        <div class="comment-wrapper">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Dérnier commentaires
+                </div>
+                <div class="panel-body">
+                    <ul class="media-list">
+                    {% for commentaire in article.getCommentaires() %}
+                        <li class="media">
+                            <a href="#" class="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+                            </a>
+                            <div class="media-body">
+                                <strong class="text-success">@{{ commentaire.getUtilisateur().username }}</strong>
+                                {% if commentaire.getUtilisateur().username == app.user.username %}<a href="{{ path('front_article_delete_comment',{'id':commentaire.id}) }}"><i class="fa fa-trash" aria-hidden="true"></i></a>{% endif %}
+                                {% if commentaire.getUtilisateur().username == app.user.username %}<a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a>{% endif %}
+                                <p>{{ commentaire.commentaire }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+			</div><!--/ cardbox -->
+
+           </div><!--/ col-lg-6 -->	
+		  
+
+          </div><!--/ row -->
+         </div><!--/ container -->
+        </section>
+{% endfor %}
+<script>
+function myFunction(x) {
+  document.getElementById("thumb").style.color = "blue";
+  x = parseInt(document.getElementById('likes').innerHTML);
+  x = x + 1;
+  document.getElementById('likes').innerHTML = x.toString();
+  document.getElementById('likesNum').value = x;
+  document.getElementById('lk').value = x;
+  document.getElementById('likesForm').submit();
+
+}
+</script>
+{% endblock %}

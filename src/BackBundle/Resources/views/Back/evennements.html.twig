@@ -1,0 +1,58 @@
+{% extends 'base2(back).html.twig' %}
+
+{% block body %}
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row">
+		<div class="well">
+        <h1 class="text-center">List des évennements</h1>
+        {% for evennement in evennements %}
+        <div class="list-group">
+          <a href="#" class="list-group-item">
+                <div class="media col-md-3">
+                    <figure class="pull-left">
+                        <img class="media-object img-rounded img-responsive"  src="{{ evennement.image }}" >
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="list-group-item-heading"> {{ evennement.titre }} </h4>
+                    <p class="list-group-item-text">{{ evennement.description }}
+                    </p>
+                </div>
+                <div class="col-md-3 text-center">
+                	{% if evennement.status != 2 %}
+                	<h4> Evennement pour le : <br> {{ evennement.DueDate | date('d/m/y H:i') }} </h4>
+                    {% endif %}
+                    <h2> 0 Participants </h2>
+                    {% if evennement.status == 0  %} 
+                    <h3><i class="fa fa-clock-o" aria-hidden="true"></i>En cours</h3>
+                    {% elseif evennement.status == 1 %} 
+                    <h3><i class="fa fa-check" aria-hidden="true"></i>Terminé</h3> 
+                    {% else %} 
+                    <h3><i class="fa fa-times" aria-hidden="true"></i>Annuler</h3> 
+                    {% endif %}
+                    <form action="{{ path('back_events_edit',{'id':evennement.id}) }}">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Modifier l'evennement</button>
+                    </form><br>
+                    <form action="{{ path('back_events_delete',{'id':evennement.id}) }}">
+                    <button type="submit" class="btn btn-danger btn-lg btn-block">Supprimer l'evennement</button>
+                    </form>
+                    <!--<div class="stars">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                    </div>-->
+                </div>
+          </a>
+        </div>
+        {% endfor %}
+        </div>
+	</div>
+</div>
+{% endblock %}
